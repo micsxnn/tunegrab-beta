@@ -6,21 +6,21 @@
 
 **Baixe músicas e vídeos do YouTube no Android. O download roda inteiro no seu aparelho, sem servidor intermediário e sem anúncios.**
 
-<img src="docs/player-audio-demo.gif" width="300" alt="Player de música do TuneGrab em movimento: as barrinhas de DJ sobem e descem com o espectro real do áudio, os pontinhos de pico caem devagar, a barra de progresso anda e o play vira pause"/>
+<img src="docs/player-audio-demo.gif" width="300" alt="Player de música do TuneGrab em movimento: as barrinhas de DJ sobem e descidem com o espectro real do áudio, os pontinhos de pico caem devagar, a barra de progresso anda e o play vira pause"/>
 
-[![Build](https://github.com/micsxnn/TuneGrab/actions/workflows/build.yml/badge.svg)](https://github.com/micsxnn/TuneGrab/actions/workflows/build.yml)
-[![Release](https://img.shields.io/github/v/release/micsxnn/TuneGrab)](https://github.com/micsxnn/TuneGrab/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/micsxnn/TuneGrab/total)](https://github.com/micsxnn/TuneGrab/releases)
-[![License](https://img.shields.io/github/license/micsxnn/TuneGrab)](LICENSE)
+[![Build](https://github.com/micsxnn/tunegrab-beta/actions/workflows/build.yml/badge.svg)](https://github.com/micsxnn/tunegrab-beta/actions/workflows/build.yml)
+[![Release](https://img.shields.io/github/v/release/micsxnn/tunegrab-beta)](https://github.com/micsxnn/tunegrab-beta/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/micsxnn/tunegrab-beta/total)](https://github.com/micsxnn/tunegrab-beta/releases)
+[![License](https://img.shields.io/github/license/micsxnn/tunegrab-beta)](LICENSE)
 ![Android](https://img.shields.io/badge/Android-7.0%2B-3DDC84?logo=android&logoColor=white)
 ![Kotlin](https://img.shields.io/badge/Kotlin-2.4-7F52FF?logo=kotlin&logoColor=white)
 
-[**Baixar a última versão (APK)**](https://github.com/micsxnn/TuneGrab/releases/latest) ·
+[**Baixar a última versão (APK)**](https://github.com/micsxnn/tunegrab-beta/releases/latest) ·
 [**Instalação**](#instalação) ·
 [**Telas do app**](#telas-do-app) ·
 [**Como funciona**](#como-funciona) ·
 [**Roadmap**](#roadmap) ·
-[**Problemas e sugestões**](https://github.com/micsxnn/TuneGrab/issues)
+[**Problemas e sugestões**](https://github.com/micsxnn/tunegrab-beta/issues)
 
 </div>
 
@@ -413,13 +413,13 @@ versão oficial.
 - [x] **Player de vídeo com movimento: controles entram e saem deslizando, o play gira ao virar pause, os botões respondem ao toque, a barra desliza sem saltos e o disco dourado ganhou brilho** (v0.22.26)
 - [x] **Aviso de versão nova: o card não troca de release no meio do download e o registro de diagnóstico temporário saiu do app** (v0.22.27)
 - [x] **Arte animada no README: o player de música em movimento, com as barrinhas de DJ subindo e descendo com o espectro real** (v0.22.28)
-- [ ] Busca integrada (digitar o nome da música)
+- [x] **Busca integrada (digitar o nome da música)** (v0.23.0-beta)
 - [ ] **Fase 2: versão Windows (Tauri + yt-dlp)**
 
 ## Contribuições
 
 Correções, relatos de problema e novas ideias são bem-vindos no
-[rastreador de issues](https://github.com/micsxnn/TuneGrab/issues). Mantenha o
+[rastreador de issues](https://github.com/micsxnn/tunegrab-beta/issues). Mantenha o
 foco de cada alteração em um único tema e descreva o comportamento antes e
 depois da mudança.
 
