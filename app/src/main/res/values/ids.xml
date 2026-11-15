@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- IDs das abas da barra inferior (v0.19.3; 6 abas desde a v0.22.11).
+<!-- IDs das abas da barra inferior (v0.19.3; 7 abas desde a v0.23.0-beta).
      Viviam no menu_bottom_nav.xml; com a barra custom (ExpandingNavBar) as
-     abas são montadas em código (BottomNav.setup) e o menu XML saiu de cena. -->
+     abas são montadas em código (BottomNav.setup) e o menu XML saiu de cena.
+     v0.23.0-beta: adicionada aba de Busca integrada -->
 <resources>
     <item name="navHome" type="id" />
+    <item name="navSearch" type="id" />
     <item name="navYouTube" type="id" />
     <item name="navDownloads" type="id" />
     <item name="navFavorites" type="id" />

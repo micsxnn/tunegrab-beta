@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.tunegrab.app.R
 
 /**
- * Barra de navegação inferior (Início · YouTube · Downloads · Favoritos ·
+ * Barra de navegação inferior (Início · Busca · YouTube · Downloads · Favoritos ·
  * Biblioteca · Configurações — a aba Favoritos entrou na v0.22.11, entre a
  * Central e a Biblioteca: as duas são "minhas músicas", fazem par).
  *
@@ -19,11 +19,14 @@ import com.tunegrab.app.R
  * (ícone + nome lado a lado, empurrão suave nos vizinhos, pedido do autor).
  * As abas são montadas aqui em código: os ids vieram do antigo
  * menu_bottom_nav.xml e hoje moram em res/values/ids.xml.
+ *
+ * v0.23.0-beta: aba de Busca integrada ao YouTube
  */
 object BottomNav {
 
     fun setup(activity: AppCompatActivity, nav: ExpandingNavBar, containerId: Int, defaultItemId: Int) {
-        nav.addTab(R.id.navHome, R.drawable.ic_nav_home, R.string.nav_home)
+        nav.addTab(R.id.navHome, R.drawable.ic_nav_hom, R.string.nav_home)
+        nav.addTab(R.id.navSearch, R.drawable.ic_search, R.string.nav_search)
         nav.addTab(R.id.navYouTube, R.drawable.ic_youtube, R.string.nav_youtube)
         nav.addTab(R.id.navDownloads, R.drawable.ic_nav_downloads, R.string.nav_downloads)
         nav.addTab(R.id.navFavorites, R.drawable.ic_nav_favorites, R.string.nav_favorites)
@@ -46,6 +49,7 @@ object BottomNav {
     private fun navigate(activity: AppCompatActivity, containerId: Int, itemId: Int) {
         val tag = when (itemId) {
             R.id.navHome -> "home"
+            R.id.navSearch -> "search"
             R.id.navYouTube -> "youtube"
             R.id.navDownloads -> "downloads"
             R.id.navFavorites -> "favorites"
@@ -64,6 +68,7 @@ object BottomNav {
 
         val fragment = when (itemId) {
             R.id.navHome -> HomeFragment()
+            R.id.navSearch -> SearchFragment()
             R.id.navYouTube -> YoutubeFragment()
             R.id.navDownloads -> DownloadsFragment()
             R.id.navFavorites -> FavoritesFragment()

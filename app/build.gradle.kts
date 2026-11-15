@@ -16,10 +16,15 @@ android {
 
     defaultConfig {
         applicationId = "com.tunegrab.app"
+        applicationIdSuffix = ".beta"
         minSdk = 24
         targetSdk = 34
         versionCode = 100
-        versionName = "0.22.27"
+        versionName = "0.23.0-beta"
+
+        // Chave de API do YouTube Data API (para busca integrada)
+        // Substitua "" pelo seu valor durante o build ou use flavor dimensions
+        buildConfigField("String", "YOUTUBE_API_KEY", "\"\"")
 
         // ABIs do motor yt-dlp embutido (python + ffmpeg são nativos).
         // x86/x86_64 ficam de fora para o APK não dobrar de tamanho —

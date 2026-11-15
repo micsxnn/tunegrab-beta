@@ -6,7 +6,7 @@
 
 **Baixe músicas e vídeos do YouTube no Android. O download roda inteiro no seu aparelho, sem servidor intermediário e sem anúncios.**
 
-<img src="docs/player-demo.gif" width="520" alt="Player de vídeo do TuneGrab em movimento: os controles entram deslizando, o botão de play gira ao virar pause, os botões de pular 10 segundos respondem ao toque e a barra de progresso desliza"/>
+<img src="docs/player-audio-demo.gif" width="300" alt="Player de música do TuneGrab em movimento: as barrinhas de DJ sobem e descem com o espectro real do áudio, os pontinhos de pico caem devagar, a barra de progresso anda e o play vira pause"/>
 
 [![Build](https://github.com/micsxnn/TuneGrab/actions/workflows/build.yml/badge.svg)](https://github.com/micsxnn/TuneGrab/actions/workflows/build.yml)
 [![Release](https://img.shields.io/github/v/release/micsxnn/TuneGrab)](https://github.com/micsxnn/TuneGrab/releases/latest)
@@ -122,10 +122,10 @@ favoritos, e o restante da coleção se organiza em pastas.
 ### Player
 
 <p align="center">
-  <img src="docs/player-demo.gif" width="560" alt="Player de vídeo do TuneGrab em movimento: os controles entram deslizando, o play gira ao virar pause, os botões de 10 segundos respondem ao toque e a barra desliza"/>
+  <img src="docs/player-audio-demo.gif" width="320" alt="Player de música do TuneGrab em movimento: as barrinhas de DJ sobem e descem com o espectro real do áudio, os pontinhos de pico caem devagar, a barra de progresso anda e o play vira pause"/>
 </p>
 
-<p align="center"><sub>Os controles do vídeo são próprios do app: entram e saem deslizando, o botão de play gira ao virar pause, os botões de pular 10 segundos respondem ao toque e a barra de progresso desliza sem saltos.</sub></p>
+<p align="center"><sub>As barrinhas de DJ são o espectro real da música que está tocando: o grave fica no centro, o agudo nas pontas, tudo espelhado. Quando a música pausa, elas caem sozinhas.</sub></p>
 
 - **Player embutido** com barra de progresso e **espectro de áudio real**, cujas
   barras acompanham o som sem exigir permissão extra. A thumbnail entra
@@ -402,6 +402,7 @@ versão oficial.
 - [x] **Download da atualização não desiste mais na troca de seção: o aviso de versão nova continua o download no escopo do app e reaparece no ponto em que parou** (v0.22.25)
 - [x] **Player de vídeo com movimento: controles entram e saem deslizando, o play gira ao virar pause, os botões respondem ao toque, a barra desliza sem saltos e o disco dourado ganhou brilho** (v0.22.26)
 - [x] **Aviso de versão nova: o card não troca de release no meio do download e o registro de diagnóstico temporário saiu do app** (v0.22.27)
+- [x] **Arte animada no README: o player de música em movimento, com as barrinhas de DJ subindo e descendo com o espectro real** (v0.22.28)
 - [ ] Busca integrada (digitar o nome da música)
 - [ ] **Fase 2: versão Windows (Tauri + yt-dlp)**
 
