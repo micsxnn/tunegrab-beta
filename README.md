@@ -31,6 +31,7 @@
 - [O que é o TuneGrab](#o-que-é-o-tunegrab)
 - [Telas do app](#telas-do-app)
 - [Funcionalidades](#funcionalidades)
+  - [Busca Integrada](#busca-integrada-v0230-beta)
   - [Downloads](#downloads)
   - [Player](#player)
   - [Biblioteca e navegação](#biblioteca-e-navegação)
@@ -40,6 +41,7 @@
   - [Plano A: yt-dlp embutido](#plano-a-yt-dlp-embutido-motor-principal)
   - [Plano B: NewPipeExtractor e PoToken](#plano-b-newpipeextractor-e-potoken-fallback)
   - [PoToken e BotGuard](#potoken-e-botguard)
+  - [Busca integrada](#busca-integrada-usando-newpipeextractor)
 - [Stack](#stack)
 - [Sobre o MP3](#sobre-o-mp3)
 - [Compilar a partir do código-fonte](#compilar-a-partir-do-código-fonte)
@@ -82,6 +84,14 @@ favoritos, e o restante da coleção se organiza em pastas.
 </table>
 
 ## Funcionalidades
+
+### Busca Integrada (v0.23.0-beta)
+
+- **Busca direta no app**: na aba Busca, digite o nome da música ou artista e encontre vídeos
+  sem precisar copiar links
+- **Resultados com thumbnails**: cada resultado mostra capa, título e canal
+- **Download direto**: toque no botão de download de qualquer resultado instantaneamente
+- **Sem API key necessária**: usa o mesmo mecanismo do NewPipeExtractor usado para downloads
 
 ### Downloads
 
