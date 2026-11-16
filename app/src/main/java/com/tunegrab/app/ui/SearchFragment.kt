@@ -18,6 +18,7 @@ import com.tunegrab.app.search.SearchViewModel
 import com.tunegrab.app.search.SearchUiState
 import com.tunegrab.app.search.ProcessedSearchResult
 import com.tunegrab.app.search.YouTubeSearchService
+import com.tunegrab.app.MainActivity
 import kotlinx.coroutines.flow.collectLatest
 
 /**

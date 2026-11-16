@@ -9,6 +9,7 @@ import org.schabi.newpipe.extractor.search.SearchInfo
 import org.schabi.newpipe.extractor.linkhandler.SearchQueryHandler
 import org.schabi.newpipe.extractor.exceptions.ExtractionException
 import org.schabi.newpipe.extractor.exceptions.ParsingException
+import org.schabi.newpipe.extractor.stream.StreamInfoItemExtractor
 
 /**
  * Serviço para busca do YouTube usando NewPipeExtractor
@@ -62,16 +63,21 @@ object YouTubeSearchService {
                 // Converte para nossos modelos
                 searchInfo.relatedItems.mapNotNull { item ->
                     try {
-                        // item é um InfoItem que no caso de busca de vídeo é YoutubeStreamInfoItemExtractor
+                        // item é um InfoItem que no caso de busca de vídeo implementa StreamInfoItemExtractor
                         val url = item.url
                         val videoId = url?.let { extractVideoId(it) }
                         if (videoId != null) {
+                            // Tenta fazer cast para StreamInfoItemExtractor para pegar uploaderName e description
+                            val streamItem = item as? StreamInfoItemExtractor
+                            val uploaderName = streamItem?.getUploaderName() ?: "Desconhecido"
+                            val description = streamItem?.getShortDescription() ?: ""
+
                             ProcessedSearchResult(
                                 videoId = videoId,
                                 title = item.name ?: "",
-                                channel = item.uploaderName ?: "Desconhecido",
+                                channel = uploaderName,
                                 thumbnailUrl = item.thumbnails?.maxByOrNull { it.height }?.url,
-                                description = item.description?.takeIf { !it.isNullOrBlank() } ?: ""
+                                description = description.takeIf { !it.isNullOrBlank() } ?: ""
                             )
                         } else {
                             null
