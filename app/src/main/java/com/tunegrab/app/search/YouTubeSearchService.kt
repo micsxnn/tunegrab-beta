@@ -5,10 +5,10 @@ import com.tunegrab.app.yt.YtExtractor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.schabi.newpipe.extractor.ServiceList
-import org.schabi.newpipe.extractor.services.youtube.extractors.YoutubeSearchResultExtractor
-import org.schabi.newpipe.extractor.search.SearchQuery
-import org.schabi.newpipe.extractor.ContentMetaData
-import java.util.concurrent.TimeUnit
+import org.schabi.newpipe.extractor.search.SearchInfo
+import org.schabi.newpipe.extractor.linkhandler.SearchQueryHandler
+import org.schabi.newpipe.extractor.exceptions.ExtractionException
+import org.schabi.newpipe.extractor.exceptions.ParsingException
 
 /**
  * Serviço para busca do YouTube usando NewPipeExtractor
@@ -44,57 +44,62 @@ object YouTubeSearchService {
      */
     suspend fun search(query: String, maxResults: Int = DEFAULT_MAX_RESULTS): List<ProcessedSearchResult> =
         withContext(Dispatchers.IO) {
-        try {
-            init()
+            try {
+                init()
 
-            if (query.isBlank()) {
-                return@withContext emptyList()
-            }
+                if (query.isBlank()) {
+                    return@withContext emptyList()
+                }
 
-            // Usa NewPipe para fazer a busca
-            val service = ServiceList.YouTube
-            val searchQuery = SearchQuery(query, SearchQuery.SearchResultType.VIDEO)
+                // Usa NewPipe para fazer a busca via SearchInfo
+                val service = ServiceList.YouTube
+                val qhFactory = service.searchQHFactory
+                val searchQuery = qhFactory.fromQuery(query, listOf("videos"), "")
 
-            // Busca os resultados
-            val results = YoutubeSearchResultExtractor.getSearchResultMetaData(
-                service = service,
-                query = searchQuery,
-                limit = maxResults.coerceAtMost(100)
-            )
+                // Busca os resultados via SearchInfo (API correta do fork)
+                val searchInfo = SearchInfo.getInfo(service, searchQuery)
 
-            // Converte para nossos modelos
-            results.mapNotNull { meta ->
-                try {
-                    val videoId = meta.getUrl()?.let { extractVideoId(it) }
-                    if (videoId != null) {
-                        ProcessedSearchResult(
-                            videoId = videoId,
-                            title = meta.getName() ?: "",
-                            channel = meta.getUploaderName() ?: "Desconhecido",
-                            thumbnailUrl = meta.getThumbnail()?.url,
-                            description = meta.getDescription().takeIf { !it.isNullOrBlank() } ?: ""
-                        )
-                    } else {
+                // Converte para nossos modelos
+                searchInfo.relatedItems.mapNotNull { item ->
+                    try {
+                        // item é um InfoItem que no caso de busca de vídeo é YoutubeStreamInfoItemExtractor
+                        val url = item.url
+                        val videoId = url?.let { extractVideoId(it) }
+                        if (videoId != null) {
+                            ProcessedSearchResult(
+                                videoId = videoId,
+                                title = item.name ?: "",
+                                channel = item.uploaderName ?: "Desconhecido",
+                                thumbnailUrl = item.thumbnails?.maxByOrNull { it.height }?.url,
+                                description = item.description?.takeIf { !it.isNullOrBlank() } ?: ""
+                            )
+                        } else {
+                            null
+                        }
+                    } catch (e: Exception) {
+                        Log.w(TAG, "Erro ao processar resultado: ${item.name}", e)
                         null
                     }
-                } catch (e: Exception) {
-                    Log.w(TAG, "Erro ao processar resultado: ${meta.getName()}", e)
-                    null
-                }
+                }.take(maxResults.coerceAtMost(100))
+            } catch (e: ExtractionException) {
+                Log.e(TAG, "Erro de extração na busca", e)
+                emptyList()
+            } catch (e: ParsingException) {
+                Log.e(TAG, "Erro de parsing na busca", e)
+                emptyList()
+            } catch (e: Exception) {
+                Log.e(TAG, "Erro na busca do YouTube", e)
+                emptyList()
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "Erro na busca do YouTube", e)
-            emptyList()
         }
-    }
 
     private fun extractVideoId(url: String): String? {
         // Extrai o ID do vídeo da URL
         val patterns = listOf(
             "v=([^&]+)",
-            "youtu\.be/([^/?]+)",
-            "youtube\.com/embed/([^/?]+)",
-            "youtube\.com/v/([^/?]+)"
+            "youtu\\.be/([^/?]+)",
+            "youtube\\.com/embed/([^/?]+)",
+            "youtube\\.com/v/([^/?]+)"
         )
 
         for (pattern in patterns) {
