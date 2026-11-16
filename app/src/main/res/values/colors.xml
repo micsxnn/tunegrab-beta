@@ -10,6 +10,7 @@
     <color name="primary">#E8C158</color>
     <color name="secondary">#C9974C</color>
     <color name="on_background">#F1EEE5</color>
+    <color name="on_surface">#F1EEE5</color>
     <color name="on_surface_variant">#A79F8C</color>
     <color name="icon_bg_start">#A06E12</color>
     <color name="icon_bg_end">#F5D161</color>

@@ -18,7 +18,7 @@
         app:boxCornerRadiusTopEnd="14dp"
         app:boxCornerRadiusTopStart="14dp"
         app:endIconMode="custom"
-        app:endIconContentDescription="@string/search_action"
+        app:endIconContentDescription="@string/btn_search"
         app:endIconDrawable="@drawable/ic_search"
         app:endIconTint="@color/primary">
 
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionSearch"
-            android:inputType="textSearch"
+            android:inputType="text"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="48dp"
-        android:text="@string/search_empty"
+        android:text="@string/search_empty_title"
         android:textColor="@color/on_surface_variant"
         android:textSize="16sp"
         android:visibility="gone" />

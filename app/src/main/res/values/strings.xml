@@ -472,16 +472,24 @@ Ligada: quando uma música da fila acaba, a próxima toca sozinha, estilo YouTub
 O switch que existe no player de música é outro caso: ele muda só a reprodução daquele momento, e quando o player fecha tudo volta pro padrão daqui — mexer lá não muda nada nas Configurações. Os botões de próxima/anterior seguem funcionando sempre.</string>
     <string name="set_autoplay_help_ok">Entendi</string>
 
+    <!-- Navegação inferior -->
+    <string name="nav_search">Buscar</string>
+
     <!-- Busca integrada (v0.23.0-beta) -->
     <string name="search_hint">Buscar músicas no YouTube</string>
+    <string name="search_action">Buscar</string>
     <string name="btn_search">Buscar</string>
     <string name="status_searching">Buscando no YouTube...</string>
     <string name="search_results_count">%1$d resultados encontrados</string>
+    <string name="search_empty_title">Nenhum resultado</string>
     <string name="search_empty">Nenhum resultado. Tenta com outro nome.</string>
     <string name="search_empty_query">Digite o nome da música ou artista.</string>
-    <string name="search_no_api_key">Chave de API do YouTube não configurada. Edite build.gradle.kts e adicione YOUTUBE_API_KEY.</string>
+    <string name="search_thumbnail">Miniatura do vídeo</string>
+    <string name="search_min_length">Digite pelo menos 2 caracteres para buscar.</string>
+    <string name="search_no_results">Nada encontrado. Tenta com palavras diferentes.</string>
+    <string name="search_error">Erro ao buscar. Verifica a internet e tenta de novo.</string>
+    <string name="search_try_again">Tentar de novo</string>
     <string name="btn_retry">Tentar de novo</string>
-    <string name="search_thumbnail">Miniatura</string>
     <string name="download">Baixar</string>
 
     <!-- Trava de acesso (v0.20.0): o app é por convite — a senha que o autor

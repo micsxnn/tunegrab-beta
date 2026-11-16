@@ -25,7 +25,7 @@ import com.tunegrab.app.R
 object BottomNav {
 
     fun setup(activity: AppCompatActivity, nav: ExpandingNavBar, containerId: Int, defaultItemId: Int) {
-        nav.addTab(R.id.navHome, R.drawable.ic_nav_hom, R.string.nav_home)
+        nav.addTab(R.id.navHome, R.drawable.ic_nav_home, R.string.nav_home)
         nav.addTab(R.id.navSearch, R.drawable.ic_search, R.string.nav_search)
         nav.addTab(R.id.navYouTube, R.drawable.ic_youtube, R.string.nav_youtube)
         nav.addTab(R.id.navDownloads, R.drawable.ic_nav_downloads, R.string.nav_downloads)

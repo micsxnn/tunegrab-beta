@@ -75,6 +75,10 @@ class SearchFragment : Fragment() {
             Toast.makeText(requireContext(), R.string.search_empty_query, Toast.LENGTH_SHORT).show()
             return
         }
+        if (query.length < 2) {
+            Toast.makeText(requireContext(), R.string.search_min_length, Toast.LENGTH_SHORT).show()
+            return
+        }
         viewModel.search(query)
     }
 
@@ -111,7 +115,11 @@ class SearchFragment : Fragment() {
         binding.tvStatus.visibility = if (state.isSearching || state.error != null) View.VISIBLE else View.GONE
 
         if (state.error != null) {
-            binding.tvStatus.text = state.error
+            binding.tvStatus.text = if (state.isSearching) {
+                getString(R.string.status_searching)
+            } else {
+                state.error
+            }
             binding.btnSearch.text = getString(R.string.btn_retry)
             binding.btnSearch.setOnClickListener {
                 binding.btnSearch.text = getString(R.string.btn_search)

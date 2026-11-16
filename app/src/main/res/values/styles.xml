@@ -149,4 +149,18 @@
         <item name="android:layout_marginStart">12dp</item>
         <item name="buttonTint">@color/primary</item>
     </style>
+<!-- ShapeAppearance para thumbnails (v0.23.0-beta: busca integrada) -->
+    <style name="ShapeAppearanceOverlay.TuneGrab.thumbnail" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <!-- Material3 Outlined Button style fix -->
+    <style name="Widget.Material3.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">14dp</item>
+    </style>
+
+    <!-- CornerRadius attribute for custom views -->
+    <attr name="CornerRadius" format="dimension" />
+
 </resources>
