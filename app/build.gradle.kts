@@ -19,8 +19,8 @@ android {
         applicationIdSuffix = ".beta"
         minSdk = 24
         targetSdk = 34
-        versionCode = 100
-        versionName = "0.23.0-beta"
+        versionCode = 101
+        versionName = "0.23.1-beta"
 
         // Chave de API do YouTube Data API (para busca integrada)
         // Substitua "" pelo seu valor durante o build ou use flavor dimensions

@@ -67,7 +67,6 @@
             android:contentDescription="@string/download"
             app:CornerRadius="22dp"
             app:icon="@drawable/ic_download"
-            app:iconGravity="center"
             app:iconSize="20dp"
             app:iconTint="@color/primary"
             app:iconTintMode="src_atop" />
