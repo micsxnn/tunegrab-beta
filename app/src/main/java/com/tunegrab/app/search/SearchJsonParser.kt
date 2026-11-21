@@ -46,6 +46,7 @@ object SearchJsonParser {
 
         val rawUrl = optString("webpage_url").trim()
             .ifEmpty { optString("url").trim() }
+        if (rawUrl.contains("/playlist?") || rawUrl.contains("/list?")) return null
         val rawId = optString("id").trim()
         val url = when {
             rawUrl.startsWith("https://www.youtube.com/watch?v=") -> rawUrl
