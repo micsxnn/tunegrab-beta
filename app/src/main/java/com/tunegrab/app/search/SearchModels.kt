@@ -62,8 +62,10 @@ data class SearchResponse(
  */
 data class ProcessedSearchResult(
     val videoId: String,
+    val webUrl: String = "https://www.youtube.com/watch?v=$videoId",
     val title: String,
     val channel: String,
     val thumbnailUrl: String?,
-    val description: String
+    val description: String,
+    val durationSec: Long? = null
 )

@@ -74,6 +74,7 @@ object YouTubeSearchService {
 
                             ProcessedSearchResult(
                                 videoId = videoId,
+                                webUrl = "https://www.youtube.com/watch?v=$videoId",
                                 title = item.name ?: "",
                                 channel = uploaderName,
                                 thumbnailUrl = item.thumbnails?.maxByOrNull { it.height }?.url,
