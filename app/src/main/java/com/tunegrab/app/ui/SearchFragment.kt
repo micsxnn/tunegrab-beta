@@ -12,12 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tunegrab.app.R
 import com.tunegrab.app.databinding.FragmentSearchBinding
-import com.tunegrab.app.download.DownloadService
 import com.tunegrab.app.search.SearchAdapter
 import com.tunegrab.app.search.SearchViewModel
 import com.tunegrab.app.search.SearchUiState
 import com.tunegrab.app.search.ProcessedSearchResult
-import com.tunegrab.app.search.YouTubeSearchService
 import com.tunegrab.app.MainActivity
 import kotlinx.coroutines.flow.collectLatest
 
@@ -71,7 +69,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun performSearch() {
-        val query = binding.inputSearch.text?.toString?.trim()
+        val query = binding.inputSearch.text?.toString().orEmpty().trim()
         if (query.isNullOrBlank()) {
             Toast.makeText(requireContext(), R.string.search_empty_query, Toast.LENGTH_SHORT).show()
             return
@@ -92,7 +90,7 @@ class SearchFragment : Fragment() {
         val url = "https://www.youtube.com/watch?v=${result.videoId}"
 
         // Reutiliza o método existente de download
-        activity.handleSharedUrl(url, autoplay = false)
+        activity.openDownloadFor(url)
     }
 
     private fun observeState() {
