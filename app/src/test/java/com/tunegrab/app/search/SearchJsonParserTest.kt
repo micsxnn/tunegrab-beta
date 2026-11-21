@@ -112,13 +112,15 @@ class SearchJsonParserTest {
         assertEquals("música test", SearchQuery.normalize("  música\n test  "))
     }
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test
     fun `normalize recusa prefixo ytsearch malicioso`() {
-        SearchQuery.normalize("ytsearch10:termo")
+        val error = runCatching { SearchQuery.normalize("ytsearch10:termo") }.exceptionOrNull()
+        assertTrue(error is IllegalArgumentException)
     }
 
-    @Test(expected = IllegalArgumentException::class)
+    @Test
     fun `normalize recusa consulta vazia`() {
-        SearchQuery.normalize("   ")
+        val error = runCatching { SearchQuery.normalize("   ") }.exceptionOrNull()
+        assertTrue(error is IllegalArgumentException)
     }
 }
