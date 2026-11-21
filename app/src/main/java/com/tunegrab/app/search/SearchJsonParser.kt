@@ -14,14 +14,14 @@ object SearchQuery {
 
         require(cleaned.isNotEmpty()) { "Digite uma música para buscar." }
         require(cleaned.length <= MAX_LENGTH) { "A busca deve ter no máximo $MAX_LENGTH caracteres." }
-        require(!cleaned.startsWith("ytsearch:", ignoreCase = true)) { "Consulta de busca inválida." }
+        require(!cleaned.startsWith("ytsearch", ignoreCase = true)) { "Consulta de busca inválida." }
         return cleaned
     }
 }
 
 object SearchJsonParser {
     private const val MAX_RESULTS = 25
-    private val videoIdPattern = Regex("^[A-Za-z0-9_-]{6,20}$")
+    private val videoIdPattern = Regex("^[A-Za-z0-9_-]{1,20}$")
 
     fun parse(json: String, maxResults: Int = MAX_RESULTS): List<ProcessedSearchResult> {
         val root = JSONObject(json)

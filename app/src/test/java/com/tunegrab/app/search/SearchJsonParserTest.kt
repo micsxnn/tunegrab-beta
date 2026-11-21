@@ -68,10 +68,12 @@ class SearchJsonParserTest {
     }
 
     @Test
-    fun `parse descarta entrada sem url utilizavel`() {
+    fun `parse usa url canonica quando entrada tem apenas id`() {
         val json = """{"entries":[{"id":"abc123","title":"Song"}]}"""
 
-        assertTrue(SearchJsonParser.parse(json).isEmpty())
+        val result = SearchJsonParser.parse(json).single()
+
+        assertEquals("https://www.youtube.com/watch?v=abc123", result.webUrl)
     }
 
     @Test
