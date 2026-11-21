@@ -38,6 +38,11 @@ jobs:
       - name: Setup Gradle (com cache)
         uses: gradle/actions/setup-gradle@v4
 
+      # Roda os testes JVM antes do build Android. A CI é o ambiente de
+      # validação deste projeto; o celular não precisa do SDK instalado.
+      - name: Run JVM tests
+        run: ./gradlew testDebugUnitTest --stacktrace
+
       # Push normal compila SÓ o release (é o que a gente instala).
       # Tag compila o debug também (vai anexado na release para depurar).
       # Sem --no-daemon: o daemon aproveita o JIT quente e o setup-gradle o encerra no fim.

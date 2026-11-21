@@ -199,4 +199,7 @@ dependencies {
 
     // Parser HTML — raspagem das fontes de letra (Genius).
     implementation("org.jsoup:jsoup:1.18.3")
+
+    // Testes JVM da lógica pura (parser, fallback e estado da busca).
+    testImplementation("junit:junit:4.13.2")
 }
