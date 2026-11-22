@@ -28,7 +28,9 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SearchViewModel by viewModels()
+    private val viewModel: SearchViewModel by viewModels {
+        SearchViewModel.factory(requireContext())
+    }
 
     private lateinit var adapter: SearchAdapter
 
@@ -87,7 +89,7 @@ class SearchFragment : Fragment() {
      */
     private fun onResultClick(result: ProcessedSearchResult) {
         val activity = activity as? MainActivity ?: return
-        val url = "https://www.youtube.com/watch?v=${result.videoId}"
+        val url = result.webUrl
 
         // Reutiliza o método existente de download
         activity.openDownloadFor(url)

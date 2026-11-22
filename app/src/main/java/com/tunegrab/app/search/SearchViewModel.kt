@@ -1,8 +1,12 @@
 package com.tunegrab.app.search
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -10,7 +14,9 @@ import kotlinx.coroutines.launch
 /**
  * ViewModel para gerenciar a busca de músicas
  */
-class SearchViewModel : ViewModel() {
+class SearchViewModel(
+    private val searchService: SearchProvider
+) : ViewModel() {
     private val TAG = "SearchViewModel"
 
     private val _uiState = MutableStateFlow(SearchUiState())
@@ -20,11 +26,7 @@ class SearchViewModel : ViewModel() {
     val searchResults: StateFlow<List<ProcessedSearchResult>> = _searchResults
 
     private var currentQuery = ""
-
-    init {
-        // Inicializa o serviço de busca
-        YouTubeSearchService.init()
-    }
+    private var searchToken = 0L
 
     fun search(query: String) {
         if (query.isBlank()) {
@@ -33,40 +35,36 @@ class SearchViewModel : ViewModel() {
             return
         }
 
-        currentQuery = query.trim()
-        _uiState.value = SearchUiState(isSearching = true, query = currentQuery)
-
-        if (!YouTubeSearchService.isConfigured()) {
-            Log.w(TAG, "Serviço de busca não configurado corretamente")
-            _uiState.value = SearchUiState(
-                isSearching = false,
-                error = "Serviço de busca não está funcionando no momento."
-            )
-            return
-        }
+        val normalizedQuery = SearchQuery.normalize(query)
+        val token = ++searchToken
+        currentQuery = normalizedQuery
+        _uiState.value = SearchUiState(isSearching = true, query = normalizedQuery)
 
         viewModelScope.launch {
             try {
-                val results = YouTubeSearchService.search(currentQuery)
+                val results = searchService.search(normalizedQuery, 25)
+                if (token != searchToken) return@launch
                 _searchResults.value = results
                 _uiState.value = SearchUiState(
                     isSearching = false,
-                    query = currentQuery,
+                    query = normalizedQuery,
                     results = results,
                     totalResults = results.size
                 )
-            } catch (e: Exception) {
-                Log.e(TAG, "Erro na busca", e)
+            } catch (error: Exception) {
+                if (token != searchToken) return@launch
+                Log.e(TAG, "Erro na busca", error)
                 _uiState.value = SearchUiState(
                     isSearching = false,
-                    query = currentQuery,
-                    error = "Erro ao buscar: ${e.message}"
+                    query = normalizedQuery,
+                    error = error.message ?: "Erro ao buscar"
                 )
             }
         }
     }
 
     fun clearSearch() {
+        searchToken++
         currentQuery = ""
         _searchResults.value = emptyList()
         _uiState.value = SearchUiState()
@@ -75,6 +73,20 @@ class SearchViewModel : ViewModel() {
     fun retrySearch() {
         if (currentQuery.isNotEmpty()) {
             search(currentQuery)
+        }
+    }
+
+    companion object {
+        fun factory(context: Context): ViewModelProvider.Factory = viewModelFactory {
+            initializer {
+                val appContext = context.applicationContext
+                SearchViewModel(
+                    HybridSearchService(
+                        primary = YtDlpSearchProvider(appContext),
+                        fallback = NewPipeSearchProvider()
+                    )
+                )
+            }
         }
     }
 }
