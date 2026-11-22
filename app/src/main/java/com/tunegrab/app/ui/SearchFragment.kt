@@ -8,7 +8,9 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tunegrab.app.R
 import com.tunegrab.app.databinding.FragmentSearchBinding
@@ -18,6 +20,7 @@ import com.tunegrab.app.search.SearchUiState
 import com.tunegrab.app.search.ProcessedSearchResult
 import com.tunegrab.app.MainActivity
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 /**
  * Aba de busca: permite buscar músicas/vídeos no YouTube e baixar diretamente
@@ -96,15 +99,18 @@ class SearchFragment : Fragment() {
     }
 
     private fun observeState() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.uiState.collectLatest { state -> updateUi(state) }
-        }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.searchResults.collectLatest { results ->
-                adapter.updateResults(results)
-                binding.recyclerViewResults.visibility = if (results.isEmpty()) View.GONE else View.VISIBLE
-                binding.tvEmpty.visibility = if (results.isEmpty()) View.VISIBLE else View.GONE
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.uiState.collectLatest { state -> updateUi(state) }
+                }
+                launch {
+                    viewModel.searchResults.collectLatest { results ->
+                        adapter.updateResults(results)
+                        binding.recyclerViewResults.visibility = if (results.isEmpty()) View.GONE else View.VISIBLE
+                        binding.tvEmpty.visibility = if (results.isEmpty()) View.VISIBLE else View.GONE
+                    }
+                }
             }
         }
     }

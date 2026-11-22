@@ -72,6 +72,18 @@ class HybridSearchServiceTest {
     }
 
     @Test
+    fun `fallback NewPipe propaga falha tecnica`() = runTest {
+        val provider = NewPipeSearchProvider { _, _ ->
+            throw SearchProviderException("NewPipe falhou")
+        }
+
+        val error = runCatching { provider.search("música", 25) }.exceptionOrNull()
+
+        assertTrue(error is SearchProviderException)
+        assertTrue(error?.message.orEmpty().contains("NewPipe falhou"))
+    }
+
+    @Test
     fun `resultado primary tem precedencia sobre fallback`() = runTest {
         val service = HybridSearchService(
             primary = SearchProvider { _, _ -> listOf(result("primary")) },

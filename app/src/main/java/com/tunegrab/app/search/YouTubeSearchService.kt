@@ -90,13 +90,13 @@ object YouTubeSearchService {
                 }.take(maxResults.coerceAtMost(100))
             } catch (e: ExtractionException) {
                 Log.e(TAG, "Erro de extração na busca", e)
-                emptyList()
+                throw SearchProviderException("Não foi possível consultar o NewPipeExtractor.", e)
             } catch (e: ParsingException) {
                 Log.e(TAG, "Erro de parsing na busca", e)
-                emptyList()
+                throw SearchProviderException("Não foi possível consultar o NewPipeExtractor.", e)
             } catch (e: Exception) {
                 Log.e(TAG, "Erro na busca do YouTube", e)
-                emptyList()
+                throw SearchProviderException("Não foi possível consultar o NewPipeExtractor.", e)
             }
         }
 

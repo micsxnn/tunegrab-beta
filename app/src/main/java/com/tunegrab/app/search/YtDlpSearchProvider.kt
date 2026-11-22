@@ -7,6 +7,7 @@ import com.yausername.youtubedl_android.YoutubeDL
 import com.yausername.youtubedl_android.YoutubeDLRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeout
 import java.util.UUID
 
 internal fun buildSearchTarget(query: String, maxResults: Int): String {
@@ -35,7 +36,9 @@ class YtDlpSearchProvider(
                 addOption("--skip-download")
             }
             val processId = UUID.randomUUID().toString()
-            val response = YoutubeDL.execute(request, processId) { _, _, _ -> }
+            val response = withTimeout(SEARCH_TIMEOUT_MS) {
+                YoutubeDL.execute(request, processId) { _, _, _ -> }
+            }
             val output = response.out
             if (output.isBlank()) {
                 throw SearchProviderException("O yt-dlp não devolveu resultados.")
@@ -51,5 +54,6 @@ class YtDlpSearchProvider(
 
     private companion object {
         const val TAG = "YtDlpSearchProvider"
+        const val SEARCH_TIMEOUT_MS = 45_000L
     }
 }
