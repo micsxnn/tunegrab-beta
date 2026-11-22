@@ -1,7 +1,7 @@
 package com.tunegrab.app.search
 
 fun interface SearchProvider {
-    suspend fun search(query: String, maxResults: Int = 25): List<ProcessedSearchResult>
+    suspend fun search(query: String, maxResults: Int): List<ProcessedSearchResult>
 }
 
 class SearchProviderException(

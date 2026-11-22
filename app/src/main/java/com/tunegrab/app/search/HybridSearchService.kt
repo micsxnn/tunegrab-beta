@@ -5,6 +5,9 @@ class HybridSearchService(
     private val fallback: SearchProvider
 ) : SearchProvider {
 
+    suspend fun search(query: String): List<ProcessedSearchResult> =
+        search(query, 25)
+
     override suspend fun search(
         query: String,
         maxResults: Int
