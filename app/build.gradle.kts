@@ -202,6 +202,7 @@ dependencies {
 
     // Testes JVM da lógica pura (parser, fallback e estado da busca).
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
     // O org.json do android.jar é apenas um stub nos testes de JVM.
     testImplementation("org.json:json:20260814")
 }
