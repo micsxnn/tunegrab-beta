@@ -56,6 +56,15 @@
                 android:maxLines="1"
                 android:ellipsize="end" />
 
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/on_surface_variant"
+                android:textSize="11sp"
+                android:visibility="gone" />
+
         </LinearLayout>
 
         <!-- Botão de download -->

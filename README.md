@@ -89,9 +89,11 @@ favoritos, e o restante da coleção se organiza em pastas.
 
 - **Busca direta no app**: na aba Busca, digite o nome da música ou artista e encontre vídeos
   sem precisar copiar links
-- **Resultados com thumbnails**: cada resultado mostra capa, título e canal
+- **Busca híbrida**: o yt-dlp embarcado faz a consulta principal e o NewPipeExtractor
+  entra apenas como fallback se a busca principal falhar tecnicamente
+- **Resultados com thumbnails**: cada resultado mostra capa, título, canal e duração
 - **Download direto**: toque no botão de download de qualquer resultado instantaneamente
-- **Sem API key necessária**: usa o mesmo mecanismo do NewPipeExtractor usado para downloads
+- **Sem API key necessária**: a busca roda inteiramente no aparelho
 
 ### Downloads
 
