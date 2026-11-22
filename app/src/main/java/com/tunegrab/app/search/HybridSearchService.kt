@@ -7,7 +7,7 @@ class HybridSearchService(
 
     override suspend fun search(
         query: String,
-        maxResults: Int
+        maxResults: Int = 25
     ): List<ProcessedSearchResult> {
         val normalizedQuery = SearchQuery.normalize(query)
         return try {
