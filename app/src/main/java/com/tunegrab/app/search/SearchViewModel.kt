@@ -1,7 +1,6 @@
 package com.tunegrab.app.search
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -17,8 +16,6 @@ import kotlinx.coroutines.launch
 class SearchViewModel(
     private val searchService: SearchProvider
 ) : ViewModel() {
-    private val TAG = "SearchViewModel"
-
     private val _uiState = MutableStateFlow(SearchUiState())
     val uiState: StateFlow<SearchUiState> = _uiState
 
@@ -53,7 +50,6 @@ class SearchViewModel(
                 )
             } catch (error: Exception) {
                 if (token != searchToken) return@launch
-                Log.e(TAG, "Erro na busca", error)
                 _uiState.value = SearchUiState(
                     isSearching = false,
                     query = normalizedQuery,
