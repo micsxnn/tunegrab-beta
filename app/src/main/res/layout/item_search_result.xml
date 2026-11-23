@@ -78,18 +78,17 @@
             android:layout_height="44dp"
             android:layout_gravity="center_vertical">
 
-            <!-- Botão de download -->
-            <com.google.android.material.button.MaterialButton
+            <!-- Botão de download (ImageButton, padrão da casa dos cards de
+                 download — o iconGravity="center" do MaterialButton NÃO existe
+                 no Material 1.12 e derrubava o aapt2: failed linking resources) -->
+            <ImageButton
                 android:id="@+id/btnDownload"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/download"
-                app:cornerRadius="22dp"
-                app:icon="@drawable/ic_download"
-                app:iconGravity="center"
-                app:iconSize="20dp"
-                app:iconTint="@color/primary"
-                app:iconTintMode="src_atop" />
+                android:src="@drawable/ic_download"
+                app:tint="@color/primary" />
 
             <!-- Bolinha girando enquanto o download deste vídeo corre -->
             <com.google.android.material.progressindicator.CircularProgressIndicator
