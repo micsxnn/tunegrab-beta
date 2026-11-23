@@ -1,43 +1,21 @@
-## v0.23.0-beta
+## v0.23.2-beta
 
 ### Novidades
 
-**Busca Integrada - Abriga músicas do YouTube sem copiar links!**
+- **Busca integrada funcionando de verdade**: a aba Busca agora encontra músicas. A consulta usa o NewPipe (mesma engine do app NewPipe) e, se ele falhar ou vier vazio, cai pro yt-dlp embutido antes de desistir.
+- **Erro honesto na tela**: se a busca falhar nos dois caminhos, o motivo aparece na tela com botão "Tentar de novo". "Nada encontrado" só aparece quando é verdade.
+- **Duração da faixa**: cada resultado mostra o tempo da música quando essa informação está disponível.
 
-- Nova aba "Busca" na barra de navegação inferior
-- Digite o nome da música ou artista e encontre vídeos instantaneamente
-- Resultados com thumbnails, títulos e canais
-- Botão de download direto — tudo integrado ao fluxo de downloads do TuneGrab
-- **Nenhuma chave de API necessária** — usa o mesmo mecanismo do NewPipeExtractor usado para downloads
+### Correções
 
-### Outras melhorias
+- Corrigida a busca integrada, que não achava nenhuma música (a aba nem chegou a rodar de fato nas versões anteriores).
+- Corrigido o botão de download dos resultados da busca.
+- **Spinner de download no resultado**: enquanto baixa, o card mostra a bolinha girando com a fase (Preparando…, Na fila, Processando arquivo) ou o percentual real (45% · 2,3 MB/s), igual ao da Central de Downloads. Se falhar, mostra o motivo curtinho e volta com o botão "Tentar de novo"; concluído ou cancelado, o card volta ao normal.
+- Toque no resultado que já está baixando não enfileira o mesmo vídeo duas vezes.
+- Corrigida a compilação do APK de release (o botão de download dos resultados derrubava o build).
 
-- **Application ID alterada:** `com.tunegrab.app.beta`
-- Agora você pode instalar a versão beta ao lado da versão estável
-- Versão testável para desenvolvimento e feedback
+### Sobre a versão
 
-### Aviso importante
-
-Esta é uma versão BETA. Pode conter bugs ou comportamentos inesperados.
-Para reportar problemas, use o rastreador de issues do repositório.
-
----
-
-## Como usar a versão beta
-
-1. Instale o APK baixado desta release
-2. A versão beta tem um ID diferente da estável, então ambas podem coexistir
-3. Para atualizar para a versão estável, desinstale a beta e instale a release mais recente
-
----
-
-## Changelog completo
-
-### Corrigido
-- Estabilidade geral
-- Compatibilidade com Android 7.0+
-
-### Adicionado
-- Aba de Busca integrada ao YouTube
-- UI para resultados de busca com thumbnails
-- Download direto dos resultados de busca
+- Número interno corrigido: o app agora se identifica como 0.23.2-beta (código 101) — o APK da release v0.23.1-beta anterior se identificava internamente como 0.23.0.
+- A beta continua podendo ser instalada ao lado da versão estável (ID de aplicativo diferente).
+- Esta é uma versão BETA e pode conter bugs ou comportamentos inesperados. Para reportar problemas, use o rastreador de issues do repositório.
