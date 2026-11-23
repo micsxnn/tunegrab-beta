@@ -193,7 +193,7 @@ dependencies {
     // LastWave usam — o 1.6.3 era do Kotlin 1.9 e o plugin de serialização
     // do 2.4 exige o runtime mais novo.
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation("com.jakewharton.retrofit2:retrofit2-kotlinx-serialization-converter:1.0.0")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.12.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:1.12.0")
 
