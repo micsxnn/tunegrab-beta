@@ -56,21 +56,54 @@
                 android:maxLines="1"
                 android:ellipsize="end" />
 
+            <!-- SPINNER DE DOWNLOAD (v0.23.1-beta): fase ("Preparando…",
+                 "Na fila", "Processando arquivo") ou percentual do
+                 progresso ("45% · 2,3 MB/s") enquanto ESTE vídeo baixa -->
+            <TextView
+                android:id="@+id/statusLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/primary"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
         </LinearLayout>
 
-        <!-- Botão de download -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDownload"
+        <!-- Ação: botão de baixar OU o spinner do download em andamento -->
+        <FrameLayout
             android:layout_width="44dp"
             android:layout_height="44dp"
-            android:layout_gravity="center_vertical"
-            android:contentDescription="@string/download"
-            app:CornerRadius="22dp"
-            app:icon="@drawable/ic_download"
-            app:iconGravity="center"
-            app:iconSize="20dp"
-            app:iconTint="@color/primary"
-            app:iconTintMode="src_atop" />
+            android:layout_gravity="center_vertical">
+
+            <!-- Botão de download -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDownload"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:contentDescription="@string/download"
+                app:cornerRadius="22dp"
+                app:icon="@drawable/ic_download"
+                app:iconGravity="center"
+                app:iconSize="20dp"
+                app:iconTint="@color/primary"
+                app:iconTintMode="src_atop" />
+
+            <!-- Bolinha girando enquanto o download deste vídeo corre -->
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/itemProgress"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:indicatorColor="@color/primary"
+                app:indicatorSize="28dp"
+                app:trackThickness="3dp" />
+
+        </FrameLayout>
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -6,6 +6,7 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationManagerCompat
 import com.tunegrab.app.download.DownloadBus
+import com.tunegrab.app.search.YouTubeSearchService
 import com.tunegrab.app.update.UpdateInstaller
 import com.tunegrab.app.yt.YtDlpEngine
 import com.tunegrab.app.yt.potoken.PoTokenManager
@@ -33,6 +34,10 @@ class TuneGrabApp : Application() {
         // se o Android matou o processo enquanto um download rodava, o card
         // renasce no percentual em que parou (e não em 0%).
         DownloadBus.attach(this)
+        // v0.23.1-beta: contexto do fallback de busca da aba Buscar — quando
+        // o NewPipeExtractor é travado pelo YouTube, o plano 2 usa o yt-dlp
+        // embutido (o mesmo warm-up do bloco abaixo) pra achar os resultados
+        YouTubeSearchService.attach(this)
         // contexto do gerador de PoTokens (BotGuard via WebView)
         PoTokenManager.init(this)
         // contexto dos cookies de login do YouTube (o motor yt-dlp não recebe
