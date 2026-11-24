@@ -479,7 +479,7 @@ O switch que existe no player de música é outro caso: ele muda só a reproduç
     <string name="search_hint">Buscar músicas no YouTube</string>
     <string name="search_action">Buscar</string>
     <string name="btn_search">Buscar</string>
-    <string name="status_searching">Buscando no YouTube...</string>
+    <string name="status_searching">Buscando músicas...</string>
     <string name="search_results_count">%1$d resultados encontrados</string>
     <string name="search_empty_title">Nenhum resultado</string>
     <string name="search_empty">Nenhum resultado. Tenta com outro nome.</string>
